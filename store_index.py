@@ -5,6 +5,8 @@ from pinecone import ServerlessSpec
 import os
 from pinecone.grpc  import PineconeGRPC as Pinecone
 from dotenv import load_dotenv
+import warnings
+warnings.filterwarnings("ignore")
 
 load_dotenv()
 PINECONE_API_KEY = os.environ.get("PINECONE_API_KEY")

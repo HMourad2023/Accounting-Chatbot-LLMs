@@ -8,6 +8,8 @@ from langchain_core.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
 from src.prompt import system_prompt
 import os
+import warnings
+warnings.filterwarnings("ignore")
 
 app = Flask(__name__)
 
@@ -19,7 +21,7 @@ os.environ["GROQ_API_KEY"] = GROQ_API_KEY
 embeddings = download_hugging_face_embeddings()
 
 
-index_name = "accountingchatbot"
+index_name = "comptachatbot"
 
 docsearch = PineconeVectorStore.from_existing_index(
     index_name=index_name,
@@ -31,9 +33,9 @@ retriever = docsearch.as_retriever(
     search_kwargs = {"k" :3}
 )
 
-llm = ChatGroq(model="llama-3.1-70b-versatile",
+llm = ChatGroq(model="gemma2-9b-it",
                temperature=0,
-               max_tokens=500)
+               max_tokens= 4000)
 
 prompt = ChatPromptTemplate(
     [
