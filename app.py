@@ -1,5 +1,8 @@
 from flask import Flask,render_template,request,jsonify
 from src.helper import load_pdf_file,text_split,download_hugging_face_embeddings
+from pinecone import Pinecone, ServerlessSpec
+
+pc = Pinecone(api_key="********-****-****-****-************")
 from langchain_pinecone import PineconeVectorStore
 from langchain_groq import ChatGroq
 from langchain.chains import create_retrieval_chain
@@ -29,20 +32,24 @@ docsearch = PineconeVectorStore.from_existing_index(
     )
 
 retriever = docsearch.as_retriever(
-    search_type = "similarity",
-    search_kwargs = {"k" :3}
+    search_type="similarity",
+    search_kwargs={"k": 10}  
 )
 
-llm = ChatGroq(model="gemma2-9b-it",
-               temperature=0,
-               max_tokens= 4000)
+
+llm = ChatGroq(model="llama-3.1-70b-versatile",
+               temperature=0.1,
+               max_tokens=500) 
+
 
 prompt = ChatPromptTemplate(
     [
-        ("system",system_prompt),
-        ("human","{input}")
+        ("system", system_prompt),
+        ("human", "{input}"),
+        ("human", "Donne une réponse concise et informative.")
     ]
 )
+
 
 question_answer_chain = create_stuff_documents_chain(llm,prompt)
 rag_chain = create_retrieval_chain(retriever,question_answer_chain)
