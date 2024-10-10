@@ -5,6 +5,14 @@
 Un chatbot comptable est un outil automatisé qui utilise des modèles de langage avancés pour interagir avec les utilisateurs et fournir des réponses ou des informations liées à la comptabilité, notamment en analysant des fichiers PDF(Loi sur les comptables professionnels
 agréés).
 
+## Démo:
+
+<video width="640" height="480" controls>
+  <source src="video/Demo-Chatbot.mp4" type="video/mp4">
+  
+</video>
+
+
 ## Technologies Utilisées
 - **Python**
 - **Jupyter Notebook**
