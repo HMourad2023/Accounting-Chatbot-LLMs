@@ -62,6 +62,7 @@ agréés).
 7. **Ouvrir le dossier de travail avec l'IDE Visual Studio Code** :
     ```bash
     code .
+    ```
 
 
 
